@@ -1,0 +1,10 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t chedyhm/docker-k8s -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true chedyhm/docker-k8s npm run test -- --coverage
