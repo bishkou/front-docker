@@ -8,3 +8,15 @@ before_install:
 
 script:
   - docker run -e CI=true chedyhm/docker-k8s npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "docker-k8s"
+  env: "Dockerk8s-env"
+  bucket_name: "elasticbeanstalk-us-west-2-394021400930"
+  bucket_path: "docker-k8s"
+  on:
+    branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
